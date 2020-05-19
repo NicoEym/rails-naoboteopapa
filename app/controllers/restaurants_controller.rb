@@ -7,7 +7,7 @@ class RestaurantsController < ApplicationController
 
   def create
     @restaurant = Restaurant.new(restaurant_params)
-    @restaurant.user_id = current_user.id
+    # @restaurant.user_id = current_user.id
     if @restaurant.save
       # redirect_to new_swim_race_swim_event_path(@restaurant)
     else
@@ -16,7 +16,7 @@ class RestaurantsController < ApplicationController
   end
 
   def index
-    @restaurants = Restaurant.all
+    @restaurants = Restaurant.where.not(latitude: nil, longitude: nil)
   end
 
   def show
