@@ -17,6 +17,13 @@ class RestaurantsController < ApplicationController
 
   def index
     @restaurants = Restaurant.where.not(latitude: nil, longitude: nil)
+     @markers = @restaurants.map do |restaurant|
+      {
+        lat: restaurant.latitude,
+        lng: restaurant.longitude,
+        infoWindow: render_to_string(partial: "infowindow", locals: { restaurant: restaurant }),
+      }
+    end
   end
 
   def show
