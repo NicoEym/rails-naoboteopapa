@@ -1,0 +1,15 @@
+ <% @foods.each do |food| %>
+<div class="col-xs-12 col-md-4">
+      <div class="card-resto" style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url(<%=food.photo%>)">
+        <%= link_to("", food_path(food.id), class:"card-link")  %>
+           <div class="card-resto-info">
+
+
+            <h2><%= food.name %> </h2>
+            <h6>$R<%= food.price %> </h6>
+
+          </div>
+      </div>
+    </div>
+
+ <% end %>
