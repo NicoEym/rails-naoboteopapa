@@ -4,6 +4,6 @@ Rails.application.routes.draw do
   # get 'restaurants/my_restaurants'
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
   resources :restaurants do
-    resources :foods, only: [:new, :create, :edit, :update, :destroy]
+    resources :foods, only: [:new, :create, :edit, :update, :destroy, :show]
   end
 end

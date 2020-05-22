@@ -10,6 +10,12 @@ class FoodsController < ApplicationController
     @food.save
   end
 
+
+  def show
+    @food = Food.find(params[:id])
+  end
+
+
   def edit
     @restaurant = Restaurant.find(params[:restaurant_id])
     restaurant_id = @restaurant.id
