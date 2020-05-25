@@ -7,9 +7,9 @@ class RestaurantsController < ApplicationController
 
   def create
     @restaurant = Restaurant.new(restaurant_params)
-    # @restaurant.user_id = current_user.id
+    @restaurant.user_id = current_user.id
     if @restaurant.save
-      # redirect_to new_swim_race_swim_event_path(@restaurant)
+      redirect_to restaurant_path(@restaurant)
     else
       render :new
     end
@@ -35,6 +35,11 @@ class RestaurantsController < ApplicationController
         lng: @restaurant.longitude,
         infoWindow: render_to_string(partial: "infowindow", locals: { restaurant: @restaurant }),
       }]
+  end
+
+
+  def my_restaurants
+    @restaurants = Restaurant.where(user_id: current_user.id)
   end
 
   def edit
