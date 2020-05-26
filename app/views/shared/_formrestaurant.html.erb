@@ -1,0 +1,17 @@
+<div class="col-md-4 offset-md-4">
+  <%= simple_form_for @restaurant  do |f| %>
+      <div class="col-xs-12 col-md-12">
+        <% if current_page?(controller: 'restaurants', action: 'new')  %>
+          <h2>Criar o seu restaurante</h2>
+        <% else %>
+          <h2>Editar o seu restaurante</h2>
+        <% end %>
+        <%= f.input :name, label: 'Nome:'%>
+        <%= f.input :address, label: "Endereço:" %>
+        <%= f.input :description, label: 'Informação sobre o seu restaurante:'%>
+        <%= f.input :source_url, label: "Site:" %>
+        <%= f.input :photo, label: "Photo:" %>
+        <%= f.submit "Acrescentar comida" %>
+      </div>
+  <% end %>
+</div>

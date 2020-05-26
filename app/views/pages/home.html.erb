@@ -5,8 +5,13 @@
       <h1>Nunca mais deixa a sua comida <strong>se deperdiciar</strong>!</h1>
       <p>Nos oferecemos jeitos para os restaurantes venderem a comida antes que ela se estraga.</p>
       <div class="btn-home">
-        <a class="btn btn-ghost" href="#">Eu tenho um restaurante</a>
-        <%= link_to("Eu quero ser cliente", restaurants_path, class:'btn btn-ghost')  %>
+        <% if user_signed_in? %>
+          <%= link_to("Eu tenho um restaurante", restaurants_my_restaurants_path, class:'btn btn-ghost')  %>
+          <%= link_to("Eu quero ser cliente", restaurants_path, class:'btn btn-ghost')  %>
+        <% else %>
+          <%= link_to("Eu tenho um restaurante", new_user_session_path, class:'btn btn-ghost')  %>
+          <%= link_to("Eu quero ser cliente", restaurants_path, class:'btn btn-ghost')  %>
+        <% end %>
       </div>
     </div>
   </div>
