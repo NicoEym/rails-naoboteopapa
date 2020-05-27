@@ -7,7 +7,11 @@ class FoodsController < ApplicationController
   def create
     @food = Food.new(food_params)
     @food.restaurant = Restaurant.find(params[:restaurant_id])
-    @food.save
+    if @food.save
+      redirect_to restaurant_path(@food.restaurant)
+    else
+      render :new
+    end
   end
 
 
@@ -17,6 +21,7 @@ class FoodsController < ApplicationController
 
 
   def edit
+    @food = Food.find(params[:id])
     @restaurant = Restaurant.find(params[:restaurant_id])
     restaurant_id = @restaurant.id
     @foods = Food.where(restaurant_id: restaurant_id)
@@ -25,7 +30,7 @@ class FoodsController < ApplicationController
   def update
     @food = Food.find(params[:id])
     @food.update(food_params) if @food.name != params[:name] || @food.price != params[:price] || @food.photo != params[:photo]
-    # redirect_to edit_swim_race_swim_event_path(@swim_race)
+    redirect_to restaurant_path(@food.restaurant)
   end
 
   def destroy
