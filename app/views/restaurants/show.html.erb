@@ -9,9 +9,19 @@
       </div>
   </div>
 </div>
+
 <div class="container">
   <div class="row">
     <div class="card-container">
+       <div class="row">
+      <% if !current_user.nil? %>
+        <% if @restaurant.user_id == current_user.id %>
+           <button class="btn btn-secondary grey col-xs-12" style="margin-bottom: 0.25em"><%= link_to raw('<i class="fas fa-plus-circle"></i> Ajouter des épreuves'),  new_restaurant_food_path(@restaurant), class: "white-color-link" %>
+              </button>
+
+        <% end %>
+      <% end %>
+    </div>
 
       <%= render 'shared/cards_food', food: @foods %>
 

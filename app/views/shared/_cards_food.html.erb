@@ -1,15 +1,18 @@
  <% @foods.each do |food| %>
 <div class="col-xs-12 col-md-4">
       <div class="card-resto" style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url(<%=food.photo%>)">
-        <%= link_to("", restaurant_food_path(food.id), class:"card-link")  %>
+
+        <% if  food.restaurant.user_id == current_user.id %>
+            <div class="icons">
+            <%= link_to raw('<i class="fas fa-edit"></i>'), edit_restaurant_food_path(food.restaurant,food), class: "icon-color" %>
+              <%= link_to raw('<i id="delete-race-icon" class="fas fa-times-circle icon-color"></i>'),
+            restaurant_food_path(food.restaurant, food), method: :delete, id: "delete-race-link", class: "hidden" %>
+            </div>
+        <% end %>
            <div class="card-resto-info">
-
-
             <h2><%= food.name %> </h2>
             <h6>$R<%= food.price %> </h6>
-
           </div>
       </div>
     </div>
-
  <% end %>
