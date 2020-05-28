@@ -1,16 +1,18 @@
-<div class="row">
 <% @restaurants.each do |restaurant| %>
-    <div class="col-xs-12 col-md-4">
-      <div class="card-resto" style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url(<%=restaurant.photo%>)">
-        <%= link_to("", restaurant_path(restaurant.id), class:"card-link")  %>
-           <div class="card-resto-info">
-
-
-            <h2><%= restaurant.name %> </h2>
-            <h6><%= restaurant.foods.count %> comida disponivel...</h6>
-
-          </div>
-      </div>
+  <div class="col-xs-12 col-md-4">
+    <div class="card-resto" style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url(<%=restaurant.photo%>)">
+      <%= link_to("", restaurant_path(restaurant.id), class:"card-link")  %>
+         <div class="card-resto-info">
+          <h2><%= restaurant.name %> </h2>
+          <% if restaurant.foods.count == 0 %>
+              <h6>Nenhuma comida disponivel</h6>
+            <% elsif restaurant.foods.count == 1 %>
+              <h6>Uma comida disponivel</h6>
+            <% else %>
+              <h6><%= restaurant.foods.count %> comidas disponivéis...</h6>
+          <% end %>
+        </div>
     </div>
-  <% end %>
-</div>
+  </div>
+<% end %>
+
