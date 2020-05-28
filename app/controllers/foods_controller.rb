@@ -18,6 +18,10 @@ class FoodsController < ApplicationController
     @food = Food.find(params[:id])
   end
 
+  def my_foods
+    @restaurants = Restaurant.where(user_id: current_user.id)
+    @foods = Food.where(restaurant_id: @restaurants.ids)
+  end
 
   def edit
     @food = Food.find(params[:id])

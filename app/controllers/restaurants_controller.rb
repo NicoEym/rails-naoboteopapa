@@ -37,7 +37,6 @@ class RestaurantsController < ApplicationController
       }]
   end
 
-
   def my_restaurants
     @restaurants = Restaurant.where(user_id: current_user.id)
   end

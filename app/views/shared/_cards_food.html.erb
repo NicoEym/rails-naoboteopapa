@@ -10,6 +10,9 @@
             </div>
         <% end %>
            <div class="card-resto-info">
+            <% unless current_page?(restaurant_path(food.restaurant.id)) %>
+              <h2><%= food.restaurant.name %> </h2>
+            <% end %>
             <h2><%= food.name %> </h2>
             <h6>$R<%= food.price %> </h6>
           </div>
