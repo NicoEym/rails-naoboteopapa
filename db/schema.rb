@@ -10,10 +10,20 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_05_25_224223) do
+ActiveRecord::Schema.define(version: 2020_05_29_011653) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "baskets", force: :cascade do |t|
+    t.float "price"
+    t.bigint "user_id"
+    t.bigint "food_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["food_id"], name: "index_baskets_on_food_id"
+    t.index ["user_id"], name: "index_baskets_on_user_id"
+  end
 
   create_table "foods", force: :cascade do |t|
     t.string "name"
@@ -23,6 +33,12 @@ ActiveRecord::Schema.define(version: 2020_05_25_224223) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["restaurant_id"], name: "index_foods_on_restaurant_id"
+  end
+
+  create_table "profiles", force: :cascade do |t|
+    t.string "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "restaurants", force: :cascade do |t|
@@ -47,10 +63,15 @@ ActiveRecord::Schema.define(version: 2020_05_25_224223) do
     t.datetime "remember_created_at"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.bigint "profile_id"
     t.index ["email"], name: "index_users_on_email", unique: true
+    t.index ["profile_id"], name: "index_users_on_profile_id"
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  add_foreign_key "baskets", "foods"
+  add_foreign_key "baskets", "users"
   add_foreign_key "foods", "restaurants"
   add_foreign_key "restaurants", "users"
+  add_foreign_key "users", "profiles"
 end
