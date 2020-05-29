@@ -18,6 +18,10 @@
         <%= f.input :password_confirmation,
                     required: true,
                     input_html: { autocomplete: "Nova senha" } %>
+
+        <%= f.select :profile, options_from_collection_for_select(Profile.all, :id, :name),
+                    required: true,
+                    input_html: { autocomplete: "Perfil" } %>
       </div>
 
       <div class="form-actions">
