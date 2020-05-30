@@ -2,14 +2,14 @@
 <div class="row">
   <div class="banner short-banner" style="background-image: linear-gradient(rgba(0,0,0,0.4),rgba(0,0,0,0.4)), url(<%=@restaurant.photo%>);">
       <div class="home-container">
-        <div class="landing-intro">
+        <div class="landing-intro transparent padding1em">
           <h1><%=@restaurant.name%></h1>
-          <p><%=@restaurant.description%> - <%=@restaurant.address%></p>
+          <p><%=@restaurant.address%></p>
+          <p><%=@restaurant.description%></p>
          </div>
       </div>
   </div>
 </div>
-
 <div class="container">
   <div class="row">
     <div class="card-container col-xs-12 col-md-8">
