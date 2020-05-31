@@ -1,5 +1,7 @@
 Rails.application.routes.draw do
-  devise_for :users
+  devise_for :users do
+    resources :baskets
+  end
   root to: 'pages#home'
   get 'restaurants/my_restaurants'
   get 'foods/my_foods'

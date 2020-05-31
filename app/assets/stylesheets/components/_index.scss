@@ -26,6 +26,12 @@
   align-item: center;
 }
 
+
+.flex-direction-center {
+  display: flex;
+  flex-direction: center;
+}
+
 a { color: inherit;
   text-decoration: none;
   &:hover {
