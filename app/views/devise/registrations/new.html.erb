@@ -1,6 +1,6 @@
-<div class="banner" style="background-image: linear-gradient(rgba(0,0,0,0.4),rgba(0,0,0,0.4)), url(https://images.unsplash.com/photo-1535850452425-140ee4a8dbae?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60);">
-  <div class="container flex-center">
-    <div class="sign-form col-xs-9 col-md-6">
+<div class="banner center-form" style="background-image: linear-gradient(rgba(0,0,0,0.4),rgba(0,0,0,0.4)), url(https://images.unsplash.com/photo-1535850452425-140ee4a8dbae?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60);">
+
+  <div class="log-form col-xs-12 col-md-4">
       <h2>Criar uma conta</h2>
 
     <%= simple_form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
@@ -29,5 +29,5 @@
     <%= render "devise/shared/links" %>
 
     </div>
-  </div>
+
 </div>

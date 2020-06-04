@@ -1,6 +1,6 @@
-<div class="col-md-4 offset-md-4 transparent padding1em">
+<div class="log-form col-xs-12 col-md-4">
   <%= simple_form_for @restaurant  do |f| %>
-      <div class="col-xs-12 col-md-12">
+
         <% if current_page?(controller: 'restaurants', action: 'new')  %>
           <h2>Criar o seu restaurante</h2>
         <% else %>
@@ -12,6 +12,8 @@
         <%= f.input :source_url, label: "Site:" %>
         <%= f.input :photo, label: "Photo:" %>
         <%= f.submit "Criar restaurante" %>
-      </div>
+
   <% end %>
 </div>
+
+
