@@ -19,6 +19,10 @@
            <button class="btn btn-secondary grey col-xs-12" style="margin-bottom: 0.25em"><%= link_to raw('<i class="fas fa-plus-circle"></i>Acrecentar comida'),  new_restaurant_food_path(@restaurant), class: "white-color-link" %>
               </button>
         <% end %>
+         <% if policy(restaurant).edit? %>
+          <%= link_to "Update", edit_restaurant_path(restaurant) %>
+        <% end %>
+
       <% end %>
     </div>
     <div class="row">
