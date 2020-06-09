@@ -7,10 +7,10 @@
       <div class="btn-home">
         <% if user_signed_in? %>
           <%= link_to("Eu tenho um restaurante", restaurants_my_restaurants_path, class:'btn btn-ghost')  %>
-          <%= link_to("Eu quero ser cliente", restaurants_path, class:'btn btn-ghost')  %>
+          <%= link_to("Eu quero ser cliente", foods_path, class:'btn btn-ghost')  %>
         <% else %>
           <%= link_to("Eu tenho um restaurante", new_user_session_path, class:'btn btn-ghost')  %>
-          <%= link_to("Eu quero ser cliente", restaurants_path, class:'btn btn-ghost')  %>
+          <%= link_to("Eu quero ser cliente", foods_path, class:'btn btn-ghost')  %>
         <% end %>
       </div>
     </div>

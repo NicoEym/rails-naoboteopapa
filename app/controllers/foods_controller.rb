@@ -1,4 +1,6 @@
 class FoodsController < ApplicationController
+  authorize @food
+
   def new
     @restaurant = Restaurant.find(params[:restaurant_id])
     @food = Food.new
@@ -11,6 +13,24 @@ class FoodsController < ApplicationController
       redirect_to restaurant_path(@food.restaurant)
     else
       render :new
+    end
+  end
+
+  def index
+    @foods = Food.all
+    restaurants =[]
+
+    @foods.each do |food|
+      restaurants << food.restaurant if !food.restaurant.latitude.nil? && !food.restaurant.longitude.nil?
+    end
+
+    @restaurants = restaurants.uniq
+     @markers = @restaurants.map do |restaurant|
+      {
+        lat: restaurant.latitude,
+        lng: restaurant.longitude,
+        infoWindow: render_to_string(partial: "infowindow", locals: { restaurant: restaurant }),
+      }
     end
   end
 
