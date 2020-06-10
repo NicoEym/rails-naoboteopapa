@@ -1,6 +1,6 @@
 class RestaurantsController < ApplicationController
   skip_before_action :authenticate_user!, only: [:show, :index]
-  authorize @restaurant
+
 
   def new
     @restaurant = Restaurant.new
@@ -47,13 +47,16 @@ class RestaurantsController < ApplicationController
   end
 
   def update
+
     @restaurant = Restaurant.find(params[:id])
+    authorize @restaurant
     @restaurant.update(restaurant_params)
     # redirect_to edit_swim_race_swim_event_path(@restaurant)
   end
 
   def destroy
     @restaurant = Restaurant.find(params[:id])
+    authorize @restaurant
     @restaurant.destroy
     # redirect_to swim_races_my_races_path
   end

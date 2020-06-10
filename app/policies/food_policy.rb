@@ -1,11 +1,11 @@
-class RestaurantPolicy < ApplicationPolicy
+class FoodPolicy < ApplicationPolicy
   class Scope < Scope
     def resolve
       scope.all
     end
   end
 
-   def create?
+  def create?
     return true
   end
 
@@ -19,4 +19,3 @@ class RestaurantPolicy < ApplicationPolicy
     record.user == user
   end
 end
-
