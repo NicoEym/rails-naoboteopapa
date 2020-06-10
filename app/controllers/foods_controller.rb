@@ -17,6 +17,7 @@ class FoodsController < ApplicationController
   end
 
   def index
+    authorize @food
     @foods = Food.all
     restaurants =[]
 
@@ -52,6 +53,7 @@ class FoodsController < ApplicationController
 
   def update
     @food = Food.find(params[:id])
+    authorize @food
     @food.update(food_params) if @food.name != params[:name] || @food.price != params[:price] || @food.photo != params[:photo]
     redirect_to restaurant_path(@food.restaurant)
   end
@@ -59,6 +61,7 @@ class FoodsController < ApplicationController
   def destroy
     @restaurant = Restaurant.find(params[:restaurant_id])
     @food = Food.find(params[:id])
+    authorize @food
     @food.destroy
     redirect_to restaurant_path(@restaurant)
   end
