@@ -1,5 +1,5 @@
 class FoodsController < ApplicationController
-  authorize @food
+  skip_before_action :authenticate_user!, only: [:show, :index]
 
   def new
     @restaurant = Restaurant.find(params[:restaurant_id])
@@ -17,9 +17,9 @@ class FoodsController < ApplicationController
   end
 
   def index
-    authorize @food
+    :skip_pundit
     @foods = Food.all
-    restaurants =[]
+    restaurants = []
 
     @foods.each do |food|
       restaurants << food.restaurant if !food.restaurant.latitude.nil? && !food.restaurant.longitude.nil?

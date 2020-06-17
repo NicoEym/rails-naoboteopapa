@@ -1,6 +1,6 @@
 class RestaurantsController < ApplicationController
   skip_before_action :authenticate_user!, only: [:show, :index]
-
+  after_action :verify_authorized, except: [:index]
 
   def new
     @restaurant = Restaurant.new
