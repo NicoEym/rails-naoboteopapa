@@ -1,5 +1,6 @@
 class FoodsController < ApplicationController
   skip_before_action :authenticate_user!, only: [:show, :index]
+  skip_after_action :verify_policy_scoped, :only => :index
 
   def new
     @restaurant = Restaurant.find(params[:restaurant_id])
@@ -17,7 +18,7 @@ class FoodsController < ApplicationController
   end
 
   def index
-    :skip_pundit
+
     @foods = Food.all
     restaurants = []
 
