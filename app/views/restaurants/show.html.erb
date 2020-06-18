@@ -15,12 +15,12 @@
     <div class="card-container col-xs-12 col-md-8">
        <div class="row flex-center">
       <% if !current_user.nil? %>
-        <% if @restaurant.user_id == current_user.id %>
+        <% if @restaurant.user == current_user %>
            <button class="btn btn-secondary grey col-xs-12" style="margin-bottom: 0.25em"><%= link_to raw('<i class="fas fa-plus-circle"></i>Acrecentar comida'),  new_restaurant_food_path(@restaurant), class: "white-color-link" %>
               </button>
         <% end %>
-         <% if policy(restaurant).edit? %>
-          <%= link_to "Update", edit_restaurant_path(restaurant) %>
+         <% if current_user == @restaurant.user %>
+          <%= link_to "Update", edit_restaurant_path(@restaurant) %>
         <% end %>
 
       <% end %>

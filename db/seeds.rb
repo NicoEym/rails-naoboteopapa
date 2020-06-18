@@ -1,9 +1,9 @@
 
 require 'csv'
 
-# Food.delete_all
-# Profile.delete_all
-# Restaurant.delete_all
+Food.delete_all
+Profile.delete_all
+Restaurant.delete_all
 # User.delete_all
 
 
@@ -13,28 +13,29 @@ Profile.create(name: 'Owner')
 
 
 
-# csv_options = { col_sep: ';', quote_char: '"', headers: :first_row }
-# filesrestaurants = 'db/csv_repos/restaurant.csv'
-# filesfood = 'db/csv_repos/food.csv'
 
-# CSV.foreach(filesrestaurants, csv_options) do |row|
+csv_options = { col_sep: ';', quote_char: '"', headers: :first_row }
+filesrestaurants = 'db/csv_repos/restaurant.csv'
+filesfood = 'db/csv_repos/food.csv'
 
-#   Restaurant.create(name: row['name'], description: row['description'], address: row['address'], photo: row['photo'] )
+CSV.foreach(filesrestaurants, csv_options) do |row|
 
-#   puts "Creating Restaurant #{row['name']}"
+  resto = Restaurant.create(name: row['name'], description: row['description'], address: row['address'], photo: row['photo'] )
 
-# end
+  puts resto
 
-
-# CSV.foreach(filesfood, csv_options) do |row|
-
-#   restaurant_id = Restaurant.find_by(name: row['restaurant']).id
-#   Food.create(restaurant_id: restaurant_id, name: row['name'], price: row['price'], photo: row['photo'] )
-
-#   puts "Creating food #{row['name']}"
+end
 
 
-# end
+CSV.foreach(filesfood, csv_options) do |row|
+
+  restaurant = Restaurant.find_by(name: row['restaurant'])
+  Food.create(restaurant: restaurant, name: row['name'], price: row['price'], photo: row['photo'] )
+
+  puts "Creating food #{row['name']}"
+
+
+end
 
 
 

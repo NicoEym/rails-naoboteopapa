@@ -1,9 +1,10 @@
 class RestaurantsController < ApplicationController
   skip_before_action :authenticate_user!, only: [:show, :index]
-  after_action :verify_authorized, except: [:index]
+  after_action :verify_authorized, except: [:index, :my_restaurants, :new, :create, :show]
 
   def new
     @restaurant = Restaurant.new
+
   end
 
   def create

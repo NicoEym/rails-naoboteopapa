@@ -5,6 +5,10 @@ class RestaurantPolicy < ApplicationPolicy
     end
   end
 
+  def new
+    record.user.profile.name == "Owner"
+  end
+
    def create?
     return true
   end

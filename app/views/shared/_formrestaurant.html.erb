@@ -1,5 +1,5 @@
 <div class="log-form col-xs-12 col-md-4">
-  <%= simple_form_for @restaurant  do |f| %>
+  <%= simple_form_for [@restaurant]  do |f| %>
 
         <% if current_page?(controller: 'restaurants', action: 'new')  %>
           <h2>Criar o seu restaurante</h2>

@@ -4,6 +4,8 @@
     <h2 class="text-center">Meus restaurantes:</h2>
       <% if !@restaurants.any? %>
         <p>Você ainda não criou nenhum restaurante.</p>
+         <%= link_to "Criar meu restaurante", new_restaurant_path(current_user.id) %>
+
       <% end %>
 
     <div class="row">
