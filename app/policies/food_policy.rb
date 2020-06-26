@@ -4,17 +4,22 @@ class FoodPolicy < ApplicationPolicy
       @user  = user
       @scope = scope
     end
+
     def resolve
-      scope.all
+      @scope.all
+      # @scope.where.not(latitude: nil, longitude: nil)
     end
   end
 
-
   def create?
-    return true
+    user == record.restaurant.user
   end
 
-   def update?
+  def show?
+    true
+  end
+
+  def update?
     record.user == user
     # - record: the restaurant passed to the `authorize` method in controller
     # - user:   the `current_user` signed in with Devise.
