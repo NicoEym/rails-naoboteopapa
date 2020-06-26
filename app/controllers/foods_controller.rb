@@ -1,15 +1,20 @@
 class FoodsController < ApplicationController
   skip_before_action :authenticate_user!, only: [:show, :index]
-  skip_after_action :verify_policy_scoped, :only => :index
+  before_action :set_food, only: [:show, :edit, :update, :destroy]
 
   def new
-    @restaurant = Restaurant.find(params[:restaurant_id])
     @food = Food.new
+    @restaurant = Restaurant.find(params[:restaurant_id])
+    @food.restaurant = @restaurant
+    authorize @food
   end
 
   def create
     @food = Food.new(food_params)
-    @food.restaurant = Restaurant.find(params[:restaurant_id])
+    # @food.restaurant = Restaurant.find(params[:restaurant_id])
+    # @food = @food.build(food_params)
+    @food.build
+    authorize @food
     if @food.save
       redirect_to restaurant_path(@food.restaurant)
     else
@@ -18,8 +23,7 @@ class FoodsController < ApplicationController
   end
 
   def index
-
-    @foods = Food.all
+    @foods = policy_scope(Food)
     restaurants = []
 
     @foods.each do |food|
@@ -37,7 +41,6 @@ class FoodsController < ApplicationController
   end
 
   def show
-    @food = Food.find(params[:id])
   end
 
   def my_foods
@@ -46,14 +49,12 @@ class FoodsController < ApplicationController
   end
 
   def edit
-    @food = Food.find(params[:id])
     @restaurant = Restaurant.find(params[:restaurant_id])
     restaurant_id = @restaurant.id
     @foods = Food.where(restaurant_id: restaurant_id)
   end
 
   def update
-    @food = Food.find(params[:id])
     authorize @food
     @food.update(food_params) if @food.name != params[:name] || @food.price != params[:price] || @food.photo != params[:photo]
     redirect_to restaurant_path(@food.restaurant)
@@ -61,13 +62,17 @@ class FoodsController < ApplicationController
 
   def destroy
     @restaurant = Restaurant.find(params[:restaurant_id])
-    @food = Food.find(params[:id])
-    authorize @food
+
     @food.destroy
     redirect_to restaurant_path(@restaurant)
   end
 
   private
+
+  def set_food
+    @food = Food.find(params[:id])
+    authorize @food
+  end
 
   def food_params
     params.require(:food).permit(:restaurant_id, :name, :price, :photo)

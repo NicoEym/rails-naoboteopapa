@@ -1,10 +1,9 @@
 class RestaurantsController < ApplicationController
   skip_before_action :authenticate_user!, only: [:show, :index]
-  after_action :verify_authorized, except: [:index, :my_restaurants, :new, :create, :show]
+  before_action :set_restaurant, only: [:show, :edit, :update, :destroy]
 
   def new
     @restaurant = Restaurant.new
-
   end
 
   def create
@@ -18,8 +17,8 @@ class RestaurantsController < ApplicationController
   end
 
   def index
-    @restaurants = Restaurant.where.not(latitude: nil, longitude: nil)
-     @markers = @restaurants.map do |restaurant|
+    @restaurants = policy_scope(Restaurant)
+    @markers = @restaurants.map do |restaurant|
       {
         lat: restaurant.latitude,
         lng: restaurant.longitude,
@@ -29,7 +28,6 @@ class RestaurantsController < ApplicationController
   end
 
   def show
-    @restaurant = Restaurant.find(params[:id])
     @foods = @restaurant.foods
     @markers =
       [{
@@ -40,29 +38,29 @@ class RestaurantsController < ApplicationController
   end
 
   def my_restaurants
-    @restaurants = Restaurant.where(user_id: current_user.id)
+    @restaurants = policy_scope(Restaurant)
+    Restaurant.where(user_id: current_user.id)
   end
 
   def edit
-    @restaurant = Restaurant.find(params[:id])
   end
 
   def update
-
-    @restaurant = Restaurant.find(params[:id])
-    authorize @restaurant
     @restaurant.update(restaurant_params)
     # redirect_to edit_swim_race_swim_event_path(@restaurant)
   end
 
   def destroy
-    @restaurant = Restaurant.find(params[:id])
-    authorize @restaurant
     @restaurant.destroy
     # redirect_to swim_races_my_races_path
   end
 
   private
+
+  def set_restaurant
+    @restaurant = Restaurant.find(params[:id])
+    authorize @restaurant
+  end
 
   def restaurant_params
     params.require(:restaurant).permit(:name, :address, :description, :photo)
