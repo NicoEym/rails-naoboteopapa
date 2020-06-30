@@ -6,7 +6,16 @@ class FoodPolicy < ApplicationPolicy
     end
 
     def resolve
-      @scope.all
+      case @user.profile.name
+        when "Owner" then
+          restaurant = Restaurant.find_by(user: @user)
+
+            @scope.where(restaurant: restaurant)
+
+
+        when "Client" then
+          @scope.all
+      end
       # @scope.where.not(latitude: nil, longitude: nil)
     end
   end
