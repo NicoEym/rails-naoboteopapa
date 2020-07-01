@@ -6,18 +6,10 @@ class FoodPolicy < ApplicationPolicy
     end
 
     def resolve
-      case @user.profile.name
-        when "Owner" then
-          restaurant = Restaurant.find_by(user: @user)
-
-            @scope.where(restaurant: restaurant)
-
-
-        when "Client" then
-          @scope.all
-      end
+      @scope.all
       # @scope.where.not(latitude: nil, longitude: nil)
     end
+
   end
 
   def create?
@@ -37,4 +29,10 @@ class FoodPolicy < ApplicationPolicy
   def destroy?
     record.user == user
   end
+
+  def my_foods?
+    user == record.restaurant.user
+  end
+
+
 end

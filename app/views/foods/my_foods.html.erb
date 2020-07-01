@@ -1,5 +1,10 @@
 <div class="container">
-    <div class="row">
+  <% if @foods.nil? %>
+      <p>Você não criou comida</p>
+      <% else %>
+       <div class="row">
       <%= render 'shared/cards_food', food: @foods %>
     </div>
+  <% end %>
+
 </div>

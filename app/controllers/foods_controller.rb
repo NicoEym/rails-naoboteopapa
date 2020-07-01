@@ -10,10 +10,9 @@ class FoodsController < ApplicationController
   end
 
   def create
-    @food = Food.new(food_params)
-    # @food.restaurant = Restaurant.find(params[:restaurant_id])
-    # @food = @food.build(food_params)
-    @food.build
+    @food = Food.new
+    @food.restaurant = Restaurant.find(params[:restaurant_id])
+    @food = @food.build(food_params)
     authorize @food
     if @food.save
       redirect_to restaurant_path(@food.restaurant)
@@ -38,6 +37,12 @@ class FoodsController < ApplicationController
         infoWindow: render_to_string(partial: "infowindow", locals: { restaurant: restaurant }),
       }
     end
+  end
+
+  def my_foods
+    this_user_restaurant = Restaurant.find_by(user: current_user)
+    @foods = policy_scope(Food).where(restaurant: this_user_restaurant)
+    authorize @foods
   end
 
   def show
