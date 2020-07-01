@@ -3,6 +3,7 @@ Rails.application.routes.draw do
 
   end
   root to: 'pages#home'
+  get 'foods/my_foods'
 
   resources :foods, only: [:index]
 
