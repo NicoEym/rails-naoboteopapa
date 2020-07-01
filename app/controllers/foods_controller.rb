@@ -10,9 +10,8 @@ class FoodsController < ApplicationController
   end
 
   def create
-    @food = Food.new
+    @food = Food.new(food_params)
     @food.restaurant = Restaurant.find(params[:restaurant_id])
-    @food = @food.build(food_params)
     authorize @food
     if @food.save
       redirect_to restaurant_path(@food.restaurant)
