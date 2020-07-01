@@ -11,12 +11,12 @@
             <%= link_to "Meus restaurantes", restaurants_path, class: "btn btn-ghost" %>
             <%= link_to "Minhas comidas", foods_path, class: "btn btn-ghost" %>
           <% when "Client" then %>
-            <%= link_to "Meus restaurantes", restaurants_path, class: "btn btn-ghost" %>
+            <%= link_to "Ver comida disponivel", foods_path, class: "btn btn-ghost" %>
             <%= link_to "Meu pedido", baskets_path, class: "btn btn-ghost" %>
           <% end %>
         <% else %>
           <%= link_to("Eu tenho um restaurante", new_user_session_path, class:'btn btn-ghost')  %>
-          <%= link_to("Eu quero ser cliente", foods_path, class:'btn btn-ghost')  %>
+          <%= link_to("Eu quero ser cliente", new_user_session_path, class:'btn btn-ghost')  %>
         <% end %>
       </div>
     </div>
