@@ -2,20 +2,23 @@
 <div class="col-xs-12 col-md-4">
       <div class="card-resto" style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url(<%=food.photo%>)">
         <% if user_signed_in? %>
+
           <% if  food.restaurant.user_id == current_user.id %>
+
               <div class="icons">
               <%= link_to raw('<i class="fas fa-edit"></i>'), edit_restaurant_food_path(food.restaurant,food), class: "icon-color" %>
                 <%= link_to raw('<i id="delete-race-icon" class="fas fa-times-circle icon-color"></i>'),
               restaurant_food_path(food.restaurant, food), method: :delete, id: "delete-race-link", class: "hidden" %>
               </div>
-          <% elsif current_user.profile == "Client" %>
+          <% elsif current_user.profile.name == "Client" %>
+          <%= puts current_user.profile.name %>
               <div class="icons">
-                 <%= link_to raw('<i class="fas fa-shopping-basket"></i>'), new_basket_path(food.id, current_user.id), class: "icon-color" %>
+                 <%= link_to raw('<i class="fas fa-shopping-basket"></i>'), new_basket_path(food, current_user), class: "icon-color" %>
               </div>
           <% end %>
         <% else %>
           <div class="icons">
-                 <%= link_to raw('<i class="fas fa-shopping-basket"></i>'), new_user_session_path, class: "icon-color" %>
+                 <%= link_to raw('<i class="fas fa-shopping-basket"></i>'), create_user_session_path, class: "icon-color" %>
           </div>
         <% end %>
            <div class="card-resto-info">

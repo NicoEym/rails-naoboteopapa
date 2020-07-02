@@ -1,16 +1,17 @@
 class BasketsController < ApplicationController
 
-  def new
-    @user = User.find(params[:user_id])
-    @food = Food.find(params[:food_id])
-    @basket = Basket.new
-  end
+  # def new
+  #   @basket = Basket.new
+  #   @basket.user_id = params[:user]
+  #   @basket.food_id = params[:food]
+
+  # end
 
   def create
     @basket = Basket.new(basket_params)
-    @food = Restaurant.find(params[:restaurant_id])
+    authorize @basket
     if @basket.save
-      redirect_to restaurant_path(@food.restaurant)
+      redirect_to root_path
     else
       render :new
     end
