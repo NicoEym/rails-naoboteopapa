@@ -14,9 +14,8 @@ class RestaurantPolicy < ApplicationPolicy
   end
 
   def show?
-     true
+    true
   end
-
 
   def update?
     user_is_owner_or_admin?
